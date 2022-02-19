@@ -12,20 +12,18 @@ jobs:
     - name: Build docker image and push it to the registry
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-        DOCKER_IMAGE_ORIGIN: "ghcr.io/amet13/master-thesis/docker-latex"
       run: |
         docker build -t pdfbuilder .
         # Generate PDF artifacts
         docker run --rm -i -v ${PWD}:/master-thesis:Z pdfbuilder \
           bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
-          
+
     - name: Create GitHub release with artifacts
       uses: softprops/action-gh-release@v1
       if: startsWith(github.ref, 'refs/tags/')
       with:
         files: |
           master-thesis.pdf
-          presentation/presentation.pdf
         name: "Build ${GITHUB_SHA}"
       env:
         GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
