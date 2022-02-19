@@ -1,17 +1,22 @@
 {
-    "files.exclude": {
-      "**/*.lof": true, 
-      "**/*.lot": true,
-      "**/*.json": true,
-      "**/*.fdb_latexmk": true,
-      "**/*.fls": true,
-      "**/*.log": true,
-      "**/*.out": true,
-      "**/*.synctex.gz": true,
-      "**/*.toc": true,
-      "**/*.aux": true,
-	"**/*.xdv": true,
-      "node_modules": true
-    }
+  "files.exclude": {
+    "**/*.lof": true,
+    "**/*.lot": true,
+    "**/*.xdv": true,
+    "**/*.fdb_latexmk": true,
+    "**/*.fls": true,
+    "**/*.log": true,
+    "**/*.out": true,
+    "**/*.synctex.gz": true,
+    "**/*.toc": true,
+    "**/*.aux": true,
+    "node_modules": true
+  },
+  "editor.formatOnSave": true,
+  "[latex]": {
+    "editor.rulers": [120],
+    "editor.wordWrap": "wordWrapColumn",
+    "editor.wrappingIndent": "same",
+    "editor.wordWrapColumn": 120
   }
-
+}
