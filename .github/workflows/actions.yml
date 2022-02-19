@@ -4,19 +4,31 @@ on: [push]
 
 jobs:
   build:
+    # Базовая ОС, на которой будут исполняться команды. Оставим ubuntu
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout repo
-      uses: actions/checkout@v1
-
-    - name: Build docker image and push it to the registry
-      env:
-        GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      run: |
-        docker build -t pdfbuilder .
-        # Generate PDF artifacts
-        docker run --rm -i -v ${PWD}:/master-thesis:Z pdfbuilder \
-          bash -c "latexmk -xelatex -synctex=1 -jobname=master-thesis main.tex"
+    # Необходимо использовать этот action, чтобы получить содержимое репо
+    - uses: actions/checkout@v2
+    # Компилируем документ
+    - name: Build document
+      uses: xu-cheng/latex-action@v2
+      with:
+        root_file: main.tex
+        # Больше параметров в офф. документации
+        working_directory: ./
+        # Аргументы, к которыми запускать компилятор (latexmk)
+        # -jobname=<name> дает возможность поменять имя выходного файла
+        args: -jobname=my_doc -pdf -file-line-error -halt-on-error -interaction=nonstopmode -synctex=1 -xelatex
+        compiler: latexmk
+    # Загружаем собранные pdf-файлы
+    - name: Upload pdf document
+      uses: actions/upload-artifact@v2
+      with:
+        # Это значение используется как ключ в хранилище
+        name: my_doc
+        # Путь до собранного pdf. Может содержать “*”, “**”
+        # Здесь это <working_directory>/<jobname>.pdf
+        path: src/my_doc.pdf
 
   deploy:
     runs-on: ubuntu-latest
