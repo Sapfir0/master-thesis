@@ -10,7 +10,7 @@ jobs:
     # Необходимо использовать этот action, чтобы получить содержимое репо
     - name: Install fonts
       run: |
-        apt install -y --reinstall ttf-mscorefonts-installer && \
+        sudo apt install -y --reinstall ttf-mscorefonts-installer && \
         wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/XITSMath-Regular.otf && \
         wget https://ftp.tw.freebsd.org/distfiles/xorg/font/PTSansOFL.zip && \
         wget https://ftp.tw.freebsd.org/distfiles/xorg/font/PTMonoOFL.zip && \
