@@ -1,0 +1,33 @@
+%!TEX TS-program = xelatex
+
+\documentclass[xetex,a4paper,14pt]{extarticle} % 14й шрифт
+\input{preamble} % Подключаем преамбулу
+
+%%% Начало документа
+\begin{document}
+
+% 3 страница
+\input{inc/0-annotation} % Аннотация
+
+\tableofcontents % Содержание 
+\clearpage
+
+\input{inc/0-intro}        % Введение
+\input{inc/7-results}      % Анализ полученных результатов
+\input{inc/0-conclusion}   % Заключение
+\input{inc/0-glossary}     % Перечень сокращений и условных обозначений
+\input{inc/0-bibliography} % Библиографический список
+
+% Список иллюстративного материала
+\lof
+\clearpage
+
+% Список табличного материала
+\lot
+\clearpage
+
+% Приложения
+\input{inc/a-app} % Программа мониторинга уязвимостей в программном обеспечении
+
+\end{document}
+%%% Конец документа
