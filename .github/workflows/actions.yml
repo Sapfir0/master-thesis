@@ -7,8 +7,10 @@ jobs:
     # Базовая ОС, на которой будут исполняться команды. Оставим ubuntu
     runs-on: ubuntu-latest
     steps:
-    # Необходимо использовать этот action, чтобы получить содержимое репо
-    - name: Install fonts
+    - uses: actions/checkout@v2
+    # Компилируем документ
+    - name: Build document
+      uses: xu-cheng/latex-action@v2
       run: |
         sudo apt install -y --reinstall ttf-mscorefonts-installer && \
         wget -O /usr/share/fonts/xits-math.otf https://github.com/khaledhosny/xits-math/raw/master/XITSMath-Regular.otf && \
@@ -17,10 +19,6 @@ jobs:
         unzip -o PTSansOFL.zip -d /usr/share/fonts/ && unzip -o PTMonoOFL.zip -d /usr/share/fonts/ && \
         rm -f PTSansOFL.zip PTMonoOFL.zip && \
         fc-cache -f -v
-    - uses: actions/checkout@v2
-    # Компилируем документ
-    - name: Build document
-      uses: xu-cheng/latex-action@v2
       with:
         root_file: main.tex
         # Больше параметров в офф. документации
