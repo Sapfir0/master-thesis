@@ -29,6 +29,7 @@ jobs:
         # -jobname=<name> дает возможность поменять имя выходного файла
         args: -jobname=my_doc -pdf -file-line-error -halt-on-error -interaction=nonstopmode -synctex=1 -xelatex
         compiler: latexmk
+        extra_system_packages: ttf-mscorefonts-installer 
     # Загружаем собранные pdf-файлы
     - name: Upload pdf document
       uses: actions/upload-artifact@v2
